@@ -1,7 +1,7 @@
 class PomodoroTimer {
     constructor() {
-        this.workTime = 25 * 60; // 25 minutes in seconds
-        this.breakTime = 5 * 60; // 5 minutes in seconds
+        this.workTime = 40 * 60; // 40 minutes in seconds
+        this.breakTime = 20 * 60; // 20 minutes in seconds
         this.timeLeft = this.workTime;
         this.isRunning = false;
         this.isWorkMode = true;
@@ -62,8 +62,13 @@ class PomodoroTimer {
     updateDisplay() {
         const minutes = Math.floor(this.timeLeft / 60);
         const seconds = this.timeLeft % 60;
+        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         this.minutesDisplay.textContent = minutes.toString().padStart(2, '0');
         this.secondsDisplay.textContent = seconds.toString().padStart(2, '0');
+        
+        // Update the tab title
+        const mode = this.isWorkMode ? 'Work' : 'Break';
+        document.title = `${timeString} - ${mode} | Pomodoro Timer`;
     }
 
     switchMode() {
